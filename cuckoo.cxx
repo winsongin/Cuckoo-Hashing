@@ -88,7 +88,7 @@ bool place_in_hash_tables (string s) {
 
   pos = f(temp_s, index);
 
-  while((!placed ) && (counter < 2*tablesize)) {
+  while((!placed) && (counter < 2*tablesize)) {
     if (t[pos][index] == "") {
       cout << "String <" << temp_s << "> will be placed at";
       cout  << " t[" << pos <<"][" << index << "]" << endl;
@@ -106,13 +106,18 @@ bool place_in_hash_tables (string s) {
       cout << endl;
       // YOU NEED TO WRITE THE CODE TO STORE IN temp THE STRING STORED AT
       // t[pos][index] AND STORE IN t[pos][index] THE STRING temp_s
+      temp = t[pos][index];
+      t[pos][index] = temp_s; 
+      temp_s = temp;
 
       // NOW temp_s CONTAINING THE EVICTED STRING NEEDS TO BE STORED 
       // IN THE OTHER TABLE
 
       // WRITE THE CODE TO SET index TO INDICATE THE OTHER TABLE
+      index = index ? 0 : 1;
 
       // WRITE THE CODE TO CALCULATE IN pos THE HASH VALUE FOR temp_s
+      pos = f(temp_s, index);
 
       counter ++;
     }
@@ -144,6 +149,7 @@ size_t f(string s, size_t index) {
       po *= prime;
 
       po = po % tablesize;
+
       if (po < 0) po += tablesize;
       
       val += temp * po;
@@ -156,7 +162,33 @@ size_t f(string s, size_t index) {
   else {
     // TO DO: YOU NEED TO IMPLEMENT THE STEPS TO CALCULATE THE SECOND 
     // HASH FUNCTION in <val>
+    val = s[0];
+    val = val % tablesize; 
 
+    if(val < 0) {
+      val += tablesize;
+    }
+
+    if(len == 1) {
+      return val; 
+    }
+
+    for (i = 1; i < len; i++) { 
+        cout << "Iteration: " << i << " ";
+        temp = s[len-i-1];
+        po *= prime;
+
+        po = po % tablesize;
+
+        if (po < 0) po += tablesize;
+      
+        val += temp * po;
+        val = val % tablesize;
+
+        if (val < 0) val += tablesize;
+   
+        cout << "Val: " << val << endl;
+    }
     return val;
- }
+  }
 }
