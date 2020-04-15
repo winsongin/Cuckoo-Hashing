@@ -162,7 +162,7 @@ size_t f(string s, size_t index) {
   else {
     // TO DO: YOU NEED TO IMPLEMENT THE STEPS TO CALCULATE THE SECOND 
     // HASH FUNCTION in <val>
-    val = s[0];
+    val = s[len-1];
     val = val % tablesize; 
 
     if(val < 0) {
@@ -173,8 +173,7 @@ size_t f(string s, size_t index) {
       return val; 
     }
 
-    for (i = 1; i < len; i++) { 
-        cout << "Iteration: " << i << " ";
+    for (i = 1; i < len; i++) {
         temp = s[len-i-1];
         po *= prime;
 
@@ -186,8 +185,6 @@ size_t f(string s, size_t index) {
         val = val % tablesize;
 
         if (val < 0) val += tablesize;
-   
-        cout << "Val: " << val << endl;
     }
     return val;
   }
